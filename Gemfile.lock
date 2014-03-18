@@ -1,6 +1,11 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    coffee-script (2.2.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.7.0)
+    execjs (2.0.2)
     haml (3.1.4)
     rack (1.4.1)
     rack-protection (1.2.0)
@@ -15,5 +20,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  coffee-script
   haml
   sinatra

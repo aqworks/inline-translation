@@ -18,14 +18,14 @@ time, mark, audio, video {
   vertical-align: baseline;
   background: transparent; }
 
-/* Modular Scale ---------------------- 
-18px @ 1:1.618	 36px @ 1:1.618	 
+/* Modular Scale ----------------------
+18px @ 1:1.618	 36px @ 1:1.618
 ----------------------*/
 body {
   font: normal normal 100 100%/1.54em "Open Sans", sans-serif;
   /*  background-color: $background_main; */
   background-color: #fff;
-  color: #4d4844; 
+  color: #4d4844;
     background: transparent url(http://www.dokimos.org/ajff/idx2.gif) repeat 0 0;
   }
 

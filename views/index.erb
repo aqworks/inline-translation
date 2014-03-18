@@ -8,8 +8,8 @@
     <meta name="generator" content="iA Writer for Mac 1.2">
     <meta name="description" content="">
     <meta name="keywords" content="">
-<meta id="viewport" name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta id="viewport" name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <style type="text/css">
       body { color: #999; font: normal normal 400 100%/1.5em 'Open Sans', sans-serif; padding: 0;margin: 0; }
       a:link { color: #3366CC }
@@ -29,114 +29,133 @@
       table { border-collapse: collapse; margin: 1.5em 0; width: 100% }
       td,th { border: solid .1em #000; font-family: sans-serif; font-size: 87.5%; line-height: 1.71428571em; text-align: center }
       br {
-   display: block;
-   margin: 1px 0;
-}
+        display: block;
+        margin: 1px 0;
+      }
+
       .wrapper{
-      	margin: 3em auto; max-width: 38em; padding:0 1em;
-      
+        margin: 3em auto; max-width: 38em; padding:0 1em;
+      }
+      p[contenteditable="true"] {
+        background-color: pink;
+      }
+
+      span[contenteditable="true"] {
+        border-bottom: 1px solid pink;
+      }
+
+      p[contenteditable="false"] {
+        background-color: lightblue;
+      }
+
+      span[contenteditable="false"] {
+        border-bottom: 1px solid lightblue;
       }
       @media screen and (max-width: 479px){
-      	.wrapper{
-      		max-width: 38em;
-      		padding:0 1em;
-      		margin-top: 0;
-      		
-      	}
-      	header{
-      			display: block;
-      	}
+        .wrapper{
+          max-width: 38em;
+          padding:0 1em;
+          margin-top: 0;
+
+        }
+        header{
+          display: block;
+        }
       }
       #translation{
-      	overflow: hidden;
+        overflow: hidden;
       }
-    br.extra{
-       	display: block;
-       }
+      br.extra{
+        display: block;
+      }
       .translation br.extra{
-      	display: none;
+        display: none;
       }
       .translation span, .translation .unedited, translation .extra{
-      	
-      	display: none;
-      
+        display: none;
       }
       .hybrid span{
-      	display:inline;
+        display:inline;
       }
       .hybrid .unedited{
-      	display:block;
+        display:block;
       }
       .editable{
-      	display: inline;
-      
-      	color: #222;
+        display: inline;
+        color: #222;
       }
-      
+      .translation .editable {
+        display: block;
+      }
+      .translation p.editable {
+        margin: 1em 0;
+      }
+      .editable.block {
+        display: block;
+      }
       .editable:focus, span[contenteditable=true]{
-      	outline: none;
-      	
+        outline: none;
       }
       .spacer{
-      	min-height:1.5em;
+        min-height:1.5em;
       }
       p:focus{
-      	outline: none;
+        outline: none;
       }
       .hybrid{
-      	
       }
       header{
-      	height: 44px;
-      	font-size: 137.5%;
-      	border-bottom: 1px solid #D2D1D0;
-      	background-color: #ECEDE5;
-      	display: none;
-      	
+        height: 44px;
+        font-size: 137.5%;
+        border-bottom: 1px solid #D2D1D0;
+        background-color: #ECEDE5;
+        display: none;
+
       }
       .page_title{
-      	width: 30%;
-      	font-size: 100%;
-      	float: left;
-      	margin-left: 8px;
-      	margin-top: 6px;
+        width: 30%;
+        font-size: 100%;
+        float: left;
+        margin-left: 8px;
+        margin-top: 6px;
       }
       .toolbar{
-      	float:right;
-      	
-      
+        float:right;
+
+
       }
       .toolbar li{
-      	display: block;
-      	float: left;
-      	
+        display: block;
+        float: left;
+
       }
       .toolbar a{
-      	background-size: 37px;
-      	display: block; 
-      	width: 50px;
-      	height: 44px;
-      	border-left: 1px solid #D2D1D0;
-      	
+        background-size: 37px;
+        display: block;
+        width: 50px;
+        height: 44px;
+        border-left: 1px solid #D2D1D0;
+
       }
       .toolbar a:first-child{
-      	
+
       }
       .comments{
-      	background: transparent url("img/comment.png") no-repeat 50% 50%;
+        background: transparent url("img/comment.png") no-repeat 50% 50%;
       }
       .information{
-      	background: transparent url("img/information.png") no-repeat 50% 50%;
+        background: transparent url("img/information.png") no-repeat 50% 50%;
       }
-       .more{
-      	background: transparent url("img/more.png") no-repeat 50% 50%;
+      .more{
+        background: transparent url("img/more.png") no-repeat 50% 50%;
       }
     </style>
-  
+
     <script type="text/javascript" src="http://www.google.com/jsapi"></script><script type="text/javascript">google.load("jquery", "1");</script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
     <script type="text/javascript" src="/js/translation_ui.js"></script>
-     <script type="text/javascript" src="/js/touch.js"></script>
-     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="/js/touch.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   </head>
   <body>
   	<header role="banner">
@@ -150,31 +169,40 @@
   	<div class="wrapper">
   	<div id="translation" class="hybrid" >
     <div class="spacer"></div>
-    <p class="unedited">Dear Maria,</p>
-     <div class="spacer"></div>
-	<p class="unedited" >
-			I’m looking forward to our meeting next week in Madrid.</p>
-	<div class="spacer"></div>
-	<p class="unedited">
-		Can you please confirm the time and venue.
-	</p>
-	<div class="spacer"></div>
-
-	<p class="unedited">Also, I would like to get your feedback on our initial proposal. Have you had a chance to review it with your team? Do you see any issues with it?
-	</p>
-	<div class="spacer"></div>
-
-	<p class="unedited">It would be great if we could finalize all the details before my arrival in Madrid so that we can then focus on implementation.</p>
-	<div class="spacer"></div>
-
-	<p class="unedited">Please let me know if you any questions or concerns.</p>
-	<div class="spacer"></div>
-	<p class="unedited">Regards,</p>
-	<div class="spacer"></div>
-	<p class="unedited">Mark</p>
-	<div class="spacer"></div>
+    <p class="unedited">
+      Dear Maria,
+    </p>
+    <div class="spacer"></div>
+    <p class="unedited">
+      I’m looking forward to our meeting next week in Madrid.
+    </p>
+    <div class="spacer"></div>
+    <p class="unedited">
+      Can you please confirm the time and venue.
+    </p>
+    <div class="spacer"></div>
+    <p class="unedited">
+      Also, I would like to get your feedback on our initial proposal. Have you had a chance to review it with your team? Do you see any issues with it?
+    </p>
+    <div class="spacer"></div>
+    <p class="unedited">
+      It would be great if we could finalize all the details before my arrival in Madrid so that we can then focus on implementation.
+    </p>
+    <div class="spacer"></div>
+    <p class="unedited">
+      Please let me know if you any questions or concerns.
+    </p>
+    <div class="spacer"></div>
+    <p class="unedited">
+      Regards,
+    </p>
+    <div class="spacer"></div>
+    <p class="unedited">
+      Mark
+    </p>
+    <div class="spacer"></div>
   </div>
   </div>
   </body>
-  
+
 </html>
