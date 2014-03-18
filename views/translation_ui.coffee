@@ -16,7 +16,7 @@ class Translation
   arrowPressed: false
 
   constructor: ->
-    console.log "Initializing translation UI..."
+    # console.log "Initializing translation UI..."
     @canvas = $('#translation')
     @canvas.swipe(
       swipeLeft:  @switchHybrid
@@ -36,25 +36,25 @@ class Translation
   # Event handlers
   #
   mouseDownHandler: (e) =>
-    console.log "[event] mousedown"
+    # console.log "[event] mousedown"
     pos = @getSelectionPosition()
     if pos < 0
-      console.log("Setting all contenteditable to FALSE")
+      # console.log("Setting all contenteditable to FALSE")
       _.each($('[contenteditable="true"]'), (element) ->
         $(element).attr('contenteditable', false)
       )
 
   mouseUpHandler: (e) =>
-    console.log "[event] mouseup"
+    # console.log "[event] mouseup"
     pos = @getSelectionPosition()
     if pos > -1
-      console.log("Setting all contenteditable to TRUE")
+      # console.log("Setting all contenteditable to TRUE")
       _.each($('[contenteditable="false"]'), (element) ->
         $(element).attr('contenteditable', true)
       )
 
   clickHandler: (e) =>
-    console.log "[event] click"
+    # console.log "[event] click"
     # This seems to do nothing?
     _.each($('[contenteditable="true"]'), (element) ->
       $(element).attr('contenteditable', false)
@@ -62,16 +62,25 @@ class Translation
     pos = @getSelectionPosition()
     section = $(@getSelectedNode())
     if section.hasClass('editable')
-      console.log "This section is editable!"
+      # console.log "This section is editable!"
       section.attr('contenteditable', true)
     else if pos > -1
-      section.after('<p class="editable edit_' + @currentEl + '" contenteditable="true">&nbsp;</p>')
-      editableElement = $('.edit_' + @currentEl)
+      editedWrapper = $('<p class="edited"></p>')
+
+      editableElement = $('<p class="editable edit_' + @currentEl + '" contenteditable="true">&nbsp;</p>')
       content = section.html()
-      beforeSegment = '<span class="segment" contenteditable="true">' + section.html().substr(0, pos) + '</span>'
-      afterSegment = '<span class="segment2" contenteditable="true">' + section.html().substr(pos) + '</span>'
-      editableElement.before(beforeSegment)
-      editableElement.after(afterSegment)
+      beforeSegment = '<span class="segment" contenteditable="true">' + content.substr(0, pos) + '</span>'
+      afterSegment = '<span class="segment2" contenteditable="true">' + content.substr(pos) + '</span>'
+
+      if section.is('p.unedited')
+        editedWrapper.html(editableElement)
+        editedWrapper.prepend(beforeSegment)
+        editedWrapper.append(afterSegment)
+        section.after(editedWrapper)
+      else
+        section.after(editableElement)
+        editableElement.before(beforeSegment)
+        editableElement.after(afterSegment)
       section.remove()
 
       editableElement.focus()
@@ -87,28 +96,40 @@ class Translation
     if e.which is @k.backspace
       unless $(@getSelectedNode()).hasClass('editable')
         e.preventDefault()
-    unless @arrowPressed
-      unless $(document.activeElement).hasClass('editable')
-        section = $(@getSelectedNode())
-        pos = @getSelectionPosition
-        # if section.hasClass('editable')
-        #   console.log "This section is editable!"
-        #   # Forgot what I need this for
-        # else if pos > -1
-        if pos > -1
-          section.after('<p class="editable edit_' + @currentEl + '" contenteditable="true">&nbsp;</p>')
-          editableElement = $('.edit_' + @currentEl)
-          content = section.html()
-          beforeSegment = '<span class="segment" contenteditable="true">' + section.html().substr(0, pos) + '</span>'
-          afterSegment = '<span class="segment2" contenteditable="true">' + section.html().substr(pos) + '</span>'
-          editableElement.before(beforeSegment)
-          editableElement.after(afterSegment)
-          section.remove()
+    # unless @arrowPressed
+    #   unless $(document.activeElement).hasClass('editable')
+    #     section = $(@getSelectedNode())
+    #     pos = @getSelectionPosition
+    #     # if section.hasClass('editable')
+    #     #   console.log "This section is editable!"
+    #     #   # Forgot what I need this for
+    #     # else if pos > -1
+    #     if pos > -1
+    #       editedWrapper = $('<p class="edited"></p>')
 
-          editableElement.focus()
-          editableElement.blur( (e) =>
-            @cleanUpEditable(e.delegateTarget)
-          )
+    #       editableElement = $('<p class="editable edit_' + @currentEl + '" contenteditable="true">&nbsp;</p>')
+    #       content = section.html()
+    #       beforeSegment = '<span class="segment" contenteditable="true">' + section.html().substr(0, pos) + '</span>'
+    #       afterSegment = '<span class="segment2" contenteditable="true">' + section.html().substr(pos) + '</span>'
+    #       # if section.is('p.unedited')
+    #       #   editableElement.wrap('<p class="edited"></p>').prepend(beforeSegment).append(afterSegment)
+    #       # else
+
+    #       if section.is('p.unedited')
+    #         editedWrapper.html(editableElement)
+    #         editedWrapper.prepend(beforeSegment)
+    #         editedWrapper.append(afterSegment)
+    #         section.after(editedWrapper)
+    #       else
+    #         editableElement.before(beforeSegment)
+    #         editableElement.after(afterSegment)
+    #         section.after(editableElement)
+    #       section.remove()
+
+    #       editableElement.focus()
+    #       editableElement.blur( (e) =>
+    #         @cleanUpEditable(e.delegateTarget)
+    #       )
 
   keyUpHandler: (e) =>
     # console.log "[event] keyUp"

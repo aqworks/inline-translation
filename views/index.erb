@@ -12,7 +12,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <style type="text/css">
       body { color: #999; font: normal normal 400 100%/1.5em 'Open Sans', sans-serif; padding: 0;margin: 0; }
-      a:link { color: #3366CC }
+      a:link { color: #99BBEE }
       a:visited { color: #224488 }
       blockquote,ol,p,ul { display: block; margin: 0 0  }
       blockquote { border-left: solid .1em #E4E4E4; color: #919191; padding: 0 1.5em 0 1.4em }
@@ -36,21 +36,21 @@
       .wrapper{
         margin: 3em auto; max-width: 38em; padding:0 1em;
       }
-      p[contenteditable="true"] {
-        background-color: pink;
-      }
+      //p[contenteditable="true"] {
+      //  background-color: pink;
+      //}
 
-      span[contenteditable="true"] {
-        border-bottom: 1px solid pink;
-      }
+      //span[contenteditable="true"] {
+      //  border-bottom: 1px solid pink;
+      //}
 
-      p[contenteditable="false"] {
-        background-color: lightblue;
-      }
+      //p[contenteditable="false"] {
+      //  background-color: lightblue;
+      //}
 
-      span[contenteditable="false"] {
-        border-bottom: 1px solid lightblue;
-      }
+      //span[contenteditable="false"] {
+      //  border-bottom: 1px solid lightblue;
+      //}
       @media screen and (max-width: 479px){
         .wrapper{
           max-width: 38em;
@@ -71,13 +71,13 @@
       .translation br.extra{
         display: none;
       }
-      .translation span, .translation .unedited, translation .extra{
+      .translation span, .translation .unedited, .translation .extra, .translation .spacer{
         display: none;
       }
       .hybrid span{
         display:inline;
       }
-      .hybrid .unedited{
+      .hybrid .unedited, .hybrid .edited {
         display:block;
       }
       .editable{
@@ -87,7 +87,10 @@
       .translation .editable {
         display: block;
       }
-      .translation p.editable {
+      .translation .edited .editable {
+        display: inline;
+      }
+      .translation p {
         margin: 1em 0;
       }
       .editable.block {
@@ -149,6 +152,20 @@
       .more{
         background: transparent url("img/more.png") no-repeat 50% 50%;
       }
+
+      .hello_band {
+        background: #4d4843;
+        color: white;
+        padding: 5px;
+        text-align: center;
+      }
+      .hello_band a.next:link,
+      .hello_band a.next:visited,
+      .hello_band a.next:hover,
+      .hello_band a.next:active {
+        padding: 0 10px;
+        color: white;
+      }
     </style>
 
     <script type="text/javascript" src="http://www.google.com/jsapi"></script><script type="text/javascript">google.load("jquery", "1");</script>
@@ -158,14 +175,9 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   </head>
   <body>
-  	<header role="banner">
-  		<h1 class="page_title"> Original</h1>
-  		<ul class="toolbar">
-  			<li><a class="information" href="#"></a></li>
-  			<li><a class="comments" href="#"></a></li>
-  			<li><a class="more" href="#"></a></li>
-  		</ul>
-  	</header>
+    <div class="hello_band"> <strong>Longform Translation Prototype </strong>
+      <span>Designed by <a href="http://aqworks.com">AQ</a> and <a href="http://gengo.com">Gengo</a></span>; <a href="http://www.aqworks.com/work/gengo/" class="next">How we did it</a>
+    </div>
   	<div class="wrapper">
   	<div id="translation" class="hybrid" >
     <div class="spacer"></div>
