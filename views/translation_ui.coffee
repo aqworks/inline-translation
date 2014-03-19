@@ -170,17 +170,13 @@ class Translation
   switchTranslate: ->
     @canvas.removeClass('translation')
     @canvas.addClass('hybrid')
-    delete @keys[@k.shift]
     delete @keys[@k.t]
-    delete @keys[@k.ctrl]
     @mode = "HYBRID"
 
   switchHybrid: ->
     @canvas.removeClass('hybrid')
     @canvas.addClass('translation')
-    delete @keys[@k.shift]
     delete @keys[@k.t]
-    delete @keys[@k.ctrl]
     @mode = "TRANSLATION"
 
   getSelectedNode: ->
